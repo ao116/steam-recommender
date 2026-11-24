@@ -46,3 +46,53 @@ Python · pandas · BigQuery · SQL · implicit (ALS) · LightGBM
     python -m venv .venv
     source .venv/bin/activate      # Windows: .venv\Scripts\activate
     pip install -r requirements.txt
+
+## Cloud Data Ingestion — Google BigQuery
+
+The processed Steam interaction data is uploaded to Google BigQuery using a reusable Python pipeline.
+
+### Pipeline Features
+
+- Batch ingestion of **5,153,209 user-game interactions** from 52 Parquet files.
+- Staging table architecture to separate data ingestion from downstream analysis.
+- Missing-file detection before starting the upload.
+- Sequential batch loading using `WRITE_TRUNCATE` and `WRITE_APPEND`.
+- Row count validation to detect missing or duplicated data.
+- Automatic retry mechanism with a maximum of three attempts and a five-second delay.
+- Modular functions and centralized configuration.
+
+### Run the Pipeline
+
+```bash
+python -m src.upload_bigquery
+```
+
+### Data Architecture
+
+```text
+Raw Steam Dataset
+        |
+Data Preprocessing
+        |
+52 Parquet Files
+        |
+BigQuery Staging Table
+        |
+Data Validation
+        |
+Final BigQuery Table
+        |
+Data Analysis & Recommendation Models
+```
+
+### Design Decisions and Limitations
+
+- BigQuery Sandbox is used without enabling billing.
+- Failed uploads restart from the first batch to simplify recovery.
+- The retry mechanism does not distinguish between temporary and permanent errors.
+- Uncertain load-job states are not reconciled before retrying.
+- Promotion from the staging table to the final table is performed manually after successful validation.
+
+### Technologies
+
+Python, Pandas, PyArrow, Parquet, Google BigQuery, Google Cloud SDK, SQL.
