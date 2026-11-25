@@ -96,3 +96,12 @@ Data Analysis & Recommendation Models
 ### Technologies
 
 Python, Pandas, PyArrow, Parquet, Google BigQuery, Google Cloud SDK, SQL.
+
+### SQL Exploration and Data Cleaning
+
+- Analyzed 5,153,209 interactions across 70,912 users and 10,978 games using BigQuery.
+- Identified 58,647 duplicated user-game pairs and 59,127 extra rows.
+- Checked for missing values, empty identifiers, negative playtime, and inconsistent labels.
+- Selected maximum cumulative playtime as the deduplication strategy.
+- Recalculated positive interaction labels using the 60-minute threshold.
+- Preserved the original table and created a separate cleaned table.
