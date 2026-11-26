@@ -105,3 +105,28 @@ Python, Pandas, PyArrow, Parquet, Google BigQuery, Google Cloud SDK, SQL.
 - Selected maximum cumulative playtime as the deduplication strategy.
 - Recalculated positive interaction labels using the 60-minute threshold.
 - Preserved the original table and created a separate cleaned table.
+
+## Recommendation-Specific Exploratory Data Analysis
+
+The cleaned interaction dataset was analyzed to understand data sparsity, user activity, and game popularity before developing recommendation models.
+
+### Key Findings
+
+- The dataset contains 5.09 million interactions across 70,912 users and 10,978 games.
+- Positive feedback is defined as at least 60 minutes of playtime.
+- The positive interaction matrix is 99.70% sparse.
+- User activity and game popularity distributions are highly right-skewed.
+- The top 1%, 5%, and 10% of games account for 43.38%, 77.38%, and 88.30% of positive interactions, respectively.
+
+### Modeling Decisions
+
+- Use sparse data representations for recommendation models.
+- Require at least five positive interactions per user for initial personalized evaluation. This retains 80.15% of users, accounting for 98.96% of positive interactions.
+- Preserve the original cleaned dataset.
+- Develop a popularity-based baseline before implementing collaborative filtering.
+
+### Limitations and Future Improvements
+
+- Investigate alternative playtime thresholds for defining positive feedback.
+- Evaluate popularity bias and recommendation diversity.
+- Investigate recommendation strategies for low-activity users and unpopular games.

@@ -7,6 +7,7 @@ comm==0.2.3
 contourpy==1.4.0
 cryptography==50.0.2
 cycler==0.12.1
+db-dtypes==1.9.0
 debugpy==1.8.22
 executing==2.3.0
 fonttools==4.68.0
