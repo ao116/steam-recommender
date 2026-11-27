@@ -130,3 +130,17 @@ The cleaned interaction dataset was analyzed to understand data sparsity, user a
 - Investigate alternative playtime thresholds for defining positive feedback.
 - Evaluate popularity bias and recommendation diversity.
 - Investigate recommendation strategies for low-activity users and unpopular games.
+
+## Train/Test Split Strategy
+
+- Use positive interactions (playtime >= 60 minutes).
+- Perform an 80/20 random split for each eligible user.
+- Require at least 5 positive interactions for evaluation.
+- Keep low-activity users' positive interactions for training only.
+- Use a fixed random seed for reproducibility.
+- Perform data splitting in BigQuery.
+
+Since interaction timestamps are unavailable, temporal splitting
+is not possible with the current dataset.
+
+Implementation is planned for the next development session.
